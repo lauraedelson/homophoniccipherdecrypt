@@ -1,0 +1,2646 @@
+/* NOTE: This file is linked to after the tool_base.css file inside of tools. It provides for skinning. */
+/* many of the definitions below exist also in tool_base.css - the duplication allows for one instalation with many different looks sharing some common elements
+ */
+/* SECTION 1 GENERIC SELECTORS */
+body {
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-size: 0.9em;
+    color: #444;
+}
+
+/* stub in tool_base.css - skinned here */
+hr.itemSeparator {
+    height: 1px;
+    border-color: #2F7FAB;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+/* SECTION 2 LINKS */
+a:link {
+    color: #3698DB;
+    text-decoration: none;
+}
+a:visited {
+    color: #2F7FAB;
+    text-decoration: none;
+}
+a:hover, a:active {
+    text-decoration: none;
+}
+a:focus {
+    text-decoration: none;
+}
+/* links inside the calendar tool tables */
+table.calendar td a:hover {
+    text-decoration: none;
+}
+/* links inside the <th> of the standard list table */
+.listHier th a:link, .listHier th a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+/* some links are jscripted so the href is the same - cannot provide visited functionality - so make both the same */
+/* see: list of assignments - the cells are classed with "specialLink" */
+.specialLink a:link, .specialLink a:visited {
+    text-decoration: none;
+}
+.specialLink a:hover {
+    text-decoration: underline;
+}
+/* links in resources - selected for move */
+tr.selectedMove a:link, tr.selectedMove a:visited {
+    color: silver
+}
+/* used as background class for recent items in dropbox, anywhere */
+.recentItem {
+    padding: 2px;
+    background: url(images/new_item_back.gif) top right no-repeat;
+    _display: inline-block;
+    _margin-left: -1.5em;
+    white-space: nowrap;
+    border: 0px solid #fff;
+}
+.recentItemInstruction {
+    padding: 0 5px;
+    background: url(images/new_item_back_inst.png) center left no-repeat;
+}
+.recentItem a:link {
+    border: 0px solid #fff;
+    text-decoration: none !important;
+}
+.listNav div.instruction, .searchNav div.instruction {
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+}
+/* links associated with an item in alist */
+/* see links below announcement title in ann list */
+.itemAction a, .itemAction a:link {
+    padding: .2em .3em 1px 0;
+    white-space: nowrap;
+    border-bottom: none;
+}
+.itemAction a:visited {
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+}
+/* certain links are highlighted in resources after a selection */
+/* see "Paste copied here" after ccopying a selection in resources */
+.itemAction a.highlightlink {
+    font-weight: bold
+}
+/* links in resources - selected for move "deaden" the link */
+tr.selectedMove .itemAction a:link, tr.selectedMove .itemAction a:visited {
+    color: silver;
+    text-decoration: none;
+    border-bottom: none;
+}
+/* links for the generic toolbar - inline-block is there to make IE behave
+see: http://www.quirksmode.org/bugreports/archives/2005/07/Wrapped_inlinenowrap_elements_lose_padding_left_in.html */
+.navIntraTool a, .navIntraTool a:link {
+    margin-right: 1em;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-block;
+    color: #555;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-weight: normal;
+}
+.navIntraTool a:hover {
+    background: #FFF !important;
+    color: #2F7FAB !important;
+    border-color: #2F7FAB !important;
+    text-decoration: underline;
+}
+.navIntraTool a:link:hover, #actionToolbar a:link:hover {
+    color: #2F7FAB !important;
+}
+.navIntraTool .current a, .navIntraTool .current a {color: #fff !important;}
+.navIntraTool .current a:hover, .navIntraTool .current a:hover {color: #2F7FAB !important;}
+.navIntraTool span.current > a, .navIntraTool span.current > a:hover {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #FFF !important;
+}
+/* where one is at in hierarchy - can be static or active links */
+.breadCrumb {
+    font-size: 1.2em
+}
+/* for accessib. some breadcrumbs have h3 children - format like normal text */
+.breadCrumb h3, .breadCrumb h4, .breadCrumb h5, .breadCrumb h6 {
+    font-size: 85%
+}
+.breadCrumb a:link, .breadCrumb a:visited {
+    color: #2F7FAB;
+    text-decoration: none;
+}
+.breadCrumb a:hover {
+    color: #2F7FAB;
+    text-decoration: underline;
+}
+/* SECTION 3 CALENDAR SELECTORS */
+/* recommend - decide your palette first - then substitute colors here */
+table.calendar {
+    background-color: #ffc
+}
+table.calendar th {
+    background-color: #ffc;
+    font-weight: normal;
+    text-align: center;
+    border-collapse: collapse;
+}
+.bgActivity {
+    background-color: #ffc;
+    border: 1px solid #2F7FAB;
+    text-align: right;
+}
+.bgWithoutActivity {
+    background-color: #fff;
+    border: 1px solid #bbb;
+    text-align: right;
+}
+.borderGrayYear {
+    background-color: #eee;
+    border: 1px solid #bbb;
+    text-align: right;
+}
+.borderGrayDayWeek {
+    border-bottom: none;
+    border-collapse: collapse;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayBackground {
+    background-color: #ffc;
+    border-bottom: none;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayBgCenter {
+    background-color: #ffc;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayEmptyMiddleBottom {
+    background-color: white;
+    border: 1px solid #bbb;
+}
+.borderGrayTodayEmptyMiddleCenter {
+    background-color: white;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayLeftBottom {
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #000;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayLeftCenter {
+    border-left: 1px solid #000;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayMiddleCenter {
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayRightBottom {
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayRightCenter {
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderOnlyLeftDay {
+    background-color: #ffc;
+    border-left: 1px solid #bbb;
+}
+.borderOnlyLeft {
+    border-left: 1px solid #bbb
+}
+.borderToday {
+    border: 1px solid #000
+}
+.borderTodayCenter {
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderTodayTop {
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #000;
+}
+.borderTodayWithActivity {
+    background-color: #ffc;
+    border: 1px solid #000;
+    text-align: right;
+}
+.borderTodayWithoutActivity {
+    background-color: #777;
+    border: 1px solid #000;
+    text-align: right;
+}
+.borderTodayWithoutActivity a {
+    color: #fff
+}
+.borderTopLeft {
+    background-color: #ffc;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderTopLeftWhite {
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+}
+.borderWhiteYear {
+    background-color: #ffc;
+    border: 1px solid #fff;
+    text-align: center;
+}
+.borderWhite {
+    border-bottom: none;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+.borderGrayTodayCenter, .borderOnlyLeftTodayCenter {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayEmptyRightBottom, .borderGrayTodayEmptyRightCenter {
+    background-color: white;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+.borderGrayTodayMiddleBottom, .borderFullGray, .borderGrayMonth {
+    border: 1px solid #bbb
+}
+.borderTodayBottom, .borderGrayTodayBottom, .borderOnlyLeftTodayBottom {
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #bbb;
+}
+table.calendar .event {
+    background-color: #ffc
+}
+.timeCells {
+    background: #eee
+}
+/* SECTION 4 TABULAR DATA */
+/* skinned header of standard data table.
+    Mutliple background attributes for gradients
+*/
+.listHier th {
+    padding: .3em .4em !important;
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #f3f3f3 0%, #e7e7e7 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3f3f3), color-stop(100%,#e7e7e7));
+    background: -webkit-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: -o-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: -ms-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    border: 1px solid #e2e2e2 !important;
+    border-width: 1px 0 1px 0 !important;
+    font-weight: bold !important;
+}
+.listHier th a:hover {
+    color: #2F7FAB
+}
+/* skinned cell of standard tab. data table */
+.listHier td {
+    vertical-align: top;
+    padding: .3em .4em;
+}
+/* lines - provides rules and hover effects on some tables */
+table.lines {
+    border-collapse: separate
+}
+table.lines th {
+    border-width: 1px 0 1px 0 !important
+}
+table.lines tr:hover {
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    -ms-transition: background-color 0.2s;
+    -o-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+
+    background-color: #DEEEFF
+}
+table.lines td {
+    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #eee;
+}
+table h5 {
+    font-weight: normal !important
+}
+/* some rows needed to be excluded from the rule and hover - see resources see other sites toggle */
+table.lines tr.exclude:hover {
+    background: transparent
+}
+/* substracts the rules from the lines class- mantain the hover */
+table.nolines td {
+    border-bottom: 0px solid #bbb;
+    border-top: 0px solid #eee;
+}
+/* when an item has been copied - signal this */
+/* see resources */
+tr.selectedCopy {
+    background: #ffd
+}
+tr.selectedCopy td {
+    border-top: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+}
+/* when an item has been cut - signal this */
+tr.selectedMove {
+    color: silver;
+    background: #eee;
+}
+tr.selectedMove td {
+    border-top: 2px dotted #bbb;
+    border-bottom: 2px dotted #bbb;
+}
+/* some rows need highlighting */
+/* see announcement 3rd view option */
+tr.highLightRow {
+    background: #EEEEEE
+}
+/* highlight a row representing an item that has been added */
+tr.highLightAdded {
+    background: #afa
+}
+tr.highLightRow:hover {
+    background: #EEEEEE !important
+}
+tr.lightHighLightRow {
+    background: #ffd
+}
+/* remove the arrow indicating rows (in resources after a selection, in discussion, etc) */
+.lines td.selected img {
+    display: none
+}
+/* when a row contained a searched for item has been found */
+/* see: discussion */
+tr.selectedFound {
+    background: #cff
+}
+/* a selected row */
+tr.selectedSelected {
+    background: #eff
+}
+/* a row that is being sorted - see resources in Sakai 2.3 */
+tr#selectedReorder {
+    color: #000;
+    background: #fe6;
+}
+tr#selectedReorder:hover {
+    color: #000 !important;
+    background: #fe6 !important;
+}
+tr#selectedReorder h4 {
+    font-weight: bold
+}
+tr td.arrowHere {
+    width: 14px
+}
+tr#selectedReorder td.arrowHere {
+    /*    can give this an image if needed*/
+    /*    background: url(images/arrowhere.gif) center .5em no-repeat*/;;;
+}
+.moveUp, .moveDown {
+    width: 14px
+}
+.moveUp img, .moveDown img {
+    vertical-align: bottom;
+    padding-top: .5em;
+    width: 13px;
+}
+/* skinned info for disclosure toggle */
+/* see: assignment */
+.discTria {
+    background-color: #EEEEEE;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+}
+/* SECTION 6 HIERARCHY */
+/* headers are used in many places for structuring things semantically - these are the plain headers - below there are others contextually defined */
+.portletBody h2, h6 {
+    color: #555;
+    padding: 0;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    margin: 1em 0;
+    background-color: transparent !important;
+}
+h2 {
+    font-size: 130%
+}
+h3 {
+    font-size: 110%
+}
+h4, h5, h6 {
+    font-size: 100%
+}
+h3, h4, h5 {
+    color: #555;
+    padding: 0;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    margin: 1em 0 0 0;
+    background-color: transparent !important;
+}
+/* headers when they occur in a table
+want to make them look like normal text - but structure the content
+see: resources, any legacy list */
+.listHier th h3, .listHier th h4, .listHier th h5, .listHier th h6, .listHier td h3, .listHier td h4, .listHier td h5, .listHier td h6 {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-size: 1em;
+    background: none;
+    font-weight: normal;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+}
+/* SECTION 7 INPUTS */
+/* see: create any item */
+label {
+    color: #000;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    margin-top: .3em;
+}
+/* a required marker for a shorttext label/input pair */
+.shorttext .reqStar {
+    width: auto;
+    margin: 0 0 0 -1em;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0;
+}
+/* for alignment when an element need the same left-margin as the input of a shorttext label/input pair */
+.labelindnt {
+    font-size: 1em;
+    margin: 0 0 0 17em !important;
+}
+.shorttext input {
+
+}
+.shorttext input:focus {
+    border: 1px solid #000
+}
+textarea {
+    padding: .1em .3em;
+    border: 1px solid #bbb;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-size: 100%;
+}
+textarea:focus {
+    border: 1px solid #000
+}
+textarea.cke_source:focus {
+    border: none
+}
+/* select element for actions on items in resources tool's list view */
+.actionmenu {
+    font-size: 85%
+}
+/* optgroup element for actions on items in resources tool's list view */
+.actiongroup {
+    background-color: #fca;
+    padding: .3em 0em 0em 0em;
+}
+/* option element for actions on items in resources tool's list view */
+.actionitem {
+    background-color: #ffc;
+    padding: .3em;
+}
+/* SECTION 8 TOOLBAR */
+/* see: any tool */
+.actionToolBar, .navIntraTool {
+    margin: 0 !important;
+    padding: 4px 0 1px 2px !important;
+    letter-spacing: -4px !important;
+    color: transparent !important;
+    font-size: 0px !important;
+}
+/* Unstyle all of the items in the actionToolBar, then selectively re-style them since there are some artifacts in the toolbars */
+.actionToolBar *, .navIntraTool * {
+    margin: 0 !important;
+    padding: 2px !important;
+    border: none !important;
+    letter-spacing: normal !important;
+    color: #000;
+    font-size: 16px !important;
+    text-decoration: none !important;
+}
+.navIntraTool {
+    margin: 0 !important;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-size: 80%;
+    text-align: left;
+    background: transparent;
+    border-bottom: 1px solid #EEE;
+    background: #f6f6f6;
+}
+
+/* Button styling
+Turns the old links into buttons. The many different ways the tools have implemented the links in the past forces us to use these every specific and many selectors. The proper way is to use a UL with LIs as the buttons. */
+.navIntraTool>li>span>a,.navIntraTool>li>span.current, .navIntraTool>form>li, .navIntraTool>span, .navIntraTool>a, .navIntraTool>div>a, div.navIntraTool>ul>li>a, div.navIntraTool>ul>li>span>a, div.navIntraTool>ul>a, .navIntraTool>li.nav_item>a, ul.navIntraTool>li>a {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    display: inline-block !important;
+    margin-right: 8px !important;
+    margin-bottom: 4px !important;
+    padding: 3px 8px !important;
+
+    border: 1px solid #DBDCDE !important;
+    
+    background: #E7E7EB !important;
+    color: #444 !important;
+}
+ul.navIntraTool>li>a>span {
+    color: #444 !important;
+}
+.navIntraTool>li>span>a:hover, .navIntraTool>form>li:hover, .navIntraTool>span:hover, .navIntraTool>a:hover, .navIntraTool>div>a:hover, div.navIntraTool>ul>li>a:hover, div.navIntraTool>ul>li>span>a:hover, div.navIntraTool>ul>a:hover, .navIntraTool>li.nav_item>a:hover, ul.navIntraTool>li>a:hover {
+  background: #ffffff !important;
+  color: #2F7FAB !important;
+  border-color: #2F7FAB !important;
+}
+ul.navIntraTool>li>a>span:hover {
+  color: #2F7FAB !important;
+}
+/* IE chokes on the whole ruleset if it sees a NOT selector, so this rule has to be owritten separately */
+.navIntraTool>div>span:not(.navSeparator) {
+    display: inline-block !important;
+    margin-right: 4px !important;
+    margin-bottom: 4px !important;
+    padding: 3px 8px !important;
+    border: 1px solid #2F7FAB !important;
+    background: #E7E7EB !important;
+}
+/* Make invisible any unruly empty spans or .separator class items (remnants of old skin styles) */
+ul.navIntraTool>li>span.separator, .navIntraTool>li>span:empty, span.navSeparator {
+    display: none !important
+}
+.navIntraTool a {
+    margin: 0 !important
+}
+/* Style the currently selected tool (where classes are implemented, like Resources) */
+ul.navIntraTool>li>span.inactive {
+    border: 1px solid #DDD !important;
+    color: #444 !important;
+    background-color: #fb5617 !important;
+}
+.navIntraTool li span.current,
+.navIntraTool li span.current,
+.navIntraTool .current,
+.navIntraTool .current span {
+    color: #fff !important;
+    background-color: #2F7FAB !important;
+    border-color: #2F7FAB !important;
+}
+.navIntraTool li span.current:hover, .navIntraTool li span.current:hover, .navIntraTool .current:hover,
+.navIntraTool li span.current:active, .navIntraTool li span.current:active, .navIntraTool .current:active,
+.navIntraTool li span.current:focus, .navIntraTool li span.current:focus, .navIntraTool .current:focus {
+    color: #FFF !important;
+    background-color: #2F7FAB !important;
+}
+ul#actionToolBar.navIntraTool.actionToolBar li.dummyToolBarLink span.current {
+  background-color: #E7E7EB !important;
+  border-color: #E7E7EB !important;
+}
+.navIntraTool li span.current:hover, .navIntraTool li span.current:hover, .navIntraTool .current:hover, ul.navIntraTool>li>span.inactive:hover {background: #2F7FAB !important;}
+.specialLink ul.navIntraTool.actionToolBar li .current {color: #fff !important;}
+.specialLink ul.navIntraTool.actionToolBar li .current:hover {color: #FFF !important;}
+.specialLink ul.navIntraTool.actionToolBar li span a {color: #555;}
+.specialLink ul.navIntraTool.actionToolBar li span a:hover {color: #2F7FAB !important;}
+
+/* Add a slight border to #search inputs that appear in navIntraTool */
+.navIntraTool li #search {
+    border: 1px solid #DBDCDE !important
+}
+/* Considerations for Profile tool-style bars where everything is contained within one large toolbar rather than individual buttons */
+#page-links {
+    padding: 5px 5px !important
+}
+#page-links .icon {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    padding-left: 20px !important;
+    margin-right: 10px !important;
+}
+#page-links .current-tab>span {
+    color: #777 !important;
+    font-style: italic !important;
+}
+/* Button badges */
+#page-links .new-items-count {
+    display: inline;
+    display: inline-block;
+    min-width: 15px;
+    min-height: 15px;
+    margin-left: 5px !important;
+    padding: 1px !important;
+    background: #2F7FAB;
+    border: 2px solid white !important;
+    border-radius: 20pt;
+    color: #fff !important;
+    text-align: center;
+}
+.current-tab>.new-items-count {
+    display: none !important
+}
+/* ===[ More Tools dropdown styling ]=== */
+#dropDownDiv {
+    padding: 10px !important;
+    background: #E7E7EB !important;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #e4e4e4 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#e4e4e4)) !important;
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#e4e4e4 100%) !important;
+    background: -o-linear-gradient(top, #eeeeee 0%,#e4e4e4 100%) !important;
+    background: -ms-linear-gradient(top, #eeeeee 0%,#e4e4e4 100%) !important;
+    background: linear-gradient(top, #eeeeee 0%,#e4e4e4 100%) !important;
+    border: 1px solid #d1d1d1 !important;
+}
+/* Unstyle all in More Tools, then restyle */
+#dropDownDiv * {
+    background: none !important;
+    border: none !important;
+    font-weight: normal !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#dropDownDiv span {
+    display: block !important
+}
+#dropDownDiv span>span {
+    display: inline !important
+}
+#dropDownDiv a, #dropDownDiv a>span {
+    font-weight: bold !important
+}
+#dropDownDiv a:hover {
+    color: inherit !important
+}
+/* Buttons with images in them, such as print buttons that appear in Wiki tool */
+.navIntraTool>li>.printLinks>span>a {
+    height: 16px !important;
+    width: 20px !important;
+    background-position: center bottom !important;
+}
+.printLinks {
+    padding-right: 8px !important;
+    padding-top: 8px !important;
+}
+.navIntraTool>li>span>a>img {
+    vertical-align: -24%;
+    height: 15px;
+}
+.navIntraTool #searchField {
+    border: 1px solid #DBDCDE !important;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-size: 1em;
+    padding: 3px 4px !important;
+}
+#rwiki_container>.portletBody>form>.navIntraTool>li {
+    display: inline !important
+}
+.rwiki_searchForm>.navIntraTool>li.firstToolBarItem>span {
+    *background: none !important
+}
+/* some toolbars will have input buttons */
+/* see: resources as instructor */
+.navIntraToolLink {
+    color: #fff;
+}
+/* SECTION 9 MESSAGES */
+/* see: create any item */
+.instruction {
+    color: #555
+}
+/* see: create a site */
+.step {
+    font-size: 90%;
+    height: auto;
+}
+/* the generic required marker */
+/* see: create any item */
+.reqStar {
+    color: #2F7FAB;
+    width: auto;
+    margin-left: -1em;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0;
+    float: left;
+    border: 1px solid #fff;
+}
+/* the required marker for a longtext label/input pair */
+/* see: create any item with a textarea */
+.longtext .reqStar {
+    color: #2F7FAB;
+    font-size: 1.2em;
+    font-weight: normal;
+    padding: 0 0 0 .1em;
+    float: left;
+}
+/* when need to display the required marker inline as a part of a text */
+/* see: create any item - instruction message about requireed fields */
+.reqStarInline {
+    color: #2F7FAB;
+    font-size: 1.2em;
+    vertical-align: middle;
+    width: 1em;
+}
+/* inline blob used to indicate progress (see: upload a resource say)
+visibility gets toggled */
+#submitnotif {
+    background: #fff url(images/warn-a.gif) .3em .3em no-repeat;
+    border: 1px solid #b11;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    clear: none;
+    color: #b11;
+    font-size: small;
+    vertical-align: text-top;
+    margin: 0;
+    padding: 5px 5px 5px 25px;
+}
+/* SECTION 10 NAV PANELS */
+/* positioning etc., are defined in base - here just the skin info */
+/* see any list with more than 20 items - announcements - for example */
+.navPanel {
+    background-color: #fff
+}
+/* the default action in this control - keep in mind that anything you do to it (except to the font) will make 
+you loose the native buttonishness affordance of the os/browser */
+/* create any item - like an announcement */
+.act .active {
+    color: #2F7FAB
+}
+.act .active[disabled="disabled"] {
+    color: gray
+}
+/* SECTION 10 DATA PANELS */
+.highlightPanel {
+    border: 1px solid #eee
+}
+.infoPanel {
+    border: 1px solid #2F7FAB
+}
+.infoPanelHead {
+    border: 1px solid #2F7FAB;
+    background: #2F7FAB;
+    color: #ffd;
+}
+/* see: topic content in discussion */
+.hierItemBlock, .hierItemBlockWrapper {
+    padding: 0 .5em .5em .5em;
+    border: 1px solid silver;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    width: auto;
+    background: #fff;
+}
+/* see: forum/statistics --> display in thread */
+.hierItemBlockBold {
+    padding: 0 .5em .5em .5em;
+    border: 2px solid black;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    width: auto;
+    background: #fff;
+}
+/* see: forum/statistics-->display in thread */
+.hierItemBlockBold h4.textPanelHeaderBold {
+    border-bottom: 2px solid black;
+    margin: 0 -.4em 1.0em -.4em;
+    padding: .5em;
+    background: #ffd !important;
+}
+table.hierItemBlock td {
+    width: 100%
+}
+table.hierItemBlock td h4, table.hierItemBlock td h5, table.hierItemBlock td h6, .hierItemBlockChild h4, .hierItemBlockChild h5, .hierItemBlockChild h6 {
+    display: inline
+}
+.hierItemBlockWrapper {
+    background: #FFFFF1;
+    padding-top: 0.5em;
+}
+.hierItemBlock h4.textPanelHeader, .hierItemBlock h5.textPanelHeader, .hierItemBlock h6.textPanelHeader {
+    border-bottom: 1px solid silver;
+    margin: 0 -.4em 1.0em -.4em;
+    padding: .5em;
+    background: #ffd !important;
+}
+.hierItemBlockChild {
+    margin: .5em 0;
+    margin-left: 0.5em;
+    padding: .5em;
+    border-top: 1px solid silver;
+}
+.hierItemBlockChild td {
+    padding: .3em
+}
+/* SECTION 11 LAYOUT REQUIRED IN SPECIFIC TOOLS */
+.chatListHeadWrapper {
+    padding: .2em;
+    margin-bottom: .5em;
+    border-bottom: 1px dotted silver;
+}
+h3.chatListHeadWrapper {
+    margin-top: 0;
+}
+#chatPresenceHeadWrapper, .chatPresenceHeadWrapper {
+    margin-bottom: .5em;
+    padding: 0 0 .2em .2em;
+    border-bottom: 1px dotted silver;
+}
+#chatListWrapper, .chatListWrapper {
+    width: 83%;
+    padding-bottom: .5em;
+    float: left;
+}
+.chatListMonitor {
+    height: 300px;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: visible;
+    /* This overflow is for Netscape*/
+    overflow: -moz-scrollbars-vertical;
+}
+#chatPresenceWrapper, .chatPresenceWrapper {
+    width: 16%;
+    float: left;
+    border-left: 1px dotted silver;
+}
+#chatList, .chatList {
+    margin: 0;
+    padding-left: 1.2em;
+    list-style: none;
+    width: 96%;
+}
+#chatList li, .chatList li {
+    margin: .2em 0 0 2em;
+    padding: .2em 0;
+    text-indent: -3em;
+    line-height: 1.2em;
+}
+#chatList li .chatDate, .chatList li .chatDate {
+    font-size: .8em
+}
+.discussionToolBarIframe {
+    height: 5em;
+    width: 100%;
+}
+#discussionLayoutTop-Bottom {
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: silver;
+    clear: both;
+    width: 100%;
+}
+#discussionLayoutTop-Bottom .discussionListWrapper {
+    padding: 0;
+    vertical-align: top;
+}
+#discussionLayoutTop-Bottom .discussionItemWrapper {
+    padding: 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: silver;
+    vertical-align: top;
+}
+#discussionLayoutLeft-Right {
+    border-top: 1px solid silver;
+    clear: both;
+}
+#discussionLayoutLeft-Right .discussionListWrapper {
+    padding: 0;
+    width: 50%;
+    vertical-align: top;
+}
+#discussionLayoutLeft-Right .discussionItemWrapper {
+    padding: 0;
+    width: 50%;
+    vertical-align: top;
+    /* border-left: 1px solid orange; */
+    padding-left: .2em;
+}
+tr.selectedFound td {
+
+}
+.rosterImage {
+    border: 1px solid #bbb;
+    /* no height - so no distortion - adjust to a specific size if size known - otherwise leave as is: ;;;
+    height: 75px;*/
+    width: 75px;
+}
+.profileTable {
+    width: 100%
+}
+.rosterImageCol {
+    width: 80px;
+    vertical-align: top;
+}
+.profileData {
+    padding-left: 2em;
+    vertical-align: top;
+}
+.profileData span {
+    display: block
+}
+.profileSearch {
+    width: 40%;
+    text-align: right;
+    vertical-align: top;
+}
+.profileSearch table {
+    border: 1px solid #fff
+}
+.profileSearch span {
+    text-align: left
+}
+.profileSearchResultsNav {
+    float: right
+}
+.profileSearchResultsList {
+    float: right;
+    clear: both;
+    text-align: right;
+    margin-right: 0;
+    width: auto !important;
+}
+.profileSearchResultsListSingle {
+    text-align: left
+}
+/* PORTAL THINGS */
+/* below presence things needed by chat tool presence */
+.presenceBody {
+    background: #fff
+}
+.presenceList {
+    font-size: .8em;
+    list-style: none;
+    margin: 0;
+    padding-left: .1em;
+    /* CLASSES-459 Force a scrollbar when more than 6 students in the chat room */
+    overflow: auto;
+    max-height: 150px;
+}
+.presenceList li {
+    padding: 0 0 0 .7em;
+    margin-bottom: .2em;
+}
+/* some definitions overriding tool_base.css for the external xlogin screen */
+.loginform label {
+    color: #ffffff;
+}
+.login td.logo {
+    width: 266px;
+    background: #57068c url(images/newlogowhite.png) 25px 12px no-repeat;
+    background-position: 20px 12px;
+}
+.login td.form {
+
+}
+.login th {
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #f3f3f3 0%, #e7e7e7 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3f3f3), color-stop(100%,#e7e7e7));
+    background: -webkit-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: -o-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: -ms-linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    background: linear-gradient(top, #f3f3f3 0%,#e7e7e7 100%);
+    border: 1px solid #DBDCDE;
+    display: none;
+}
+.login {
+    border: 1px solid #DBDCDE;
+    border-collapse: collapse;
+    background: #57068c;
+}
+/* ===[ Make a list based css menu ]=== */
+ul.makeMenu, ul.makeMenu ul {
+    width: auto;
+    border: 1px solid #DBDCDE !important;
+    background: #fff;
+    padding: 3px;
+    cursor: default;
+    margin-left: 0px;
+    display: inline;
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+}
+ul.makeMenu {
+    background: #eee url(images/makemenu.gif) top left repeat-x
+}
+ul.makeMenu:hover {
+    color: #07b;
+    border: 1px solid #000 !important;
+    background: #eee url(images/makemenu-h.gif) top left repeat-x;
+}
+.listHier ul.makeMenu img {
+    margin-right: 0;
+    vertical-align: middle;
+}
+ul.makeMenu li {
+    list-style-type: none;
+    margin: 0px;
+}
+ul.makeMenu li > ul {
+    display: none;
+    width: auto;
+    background-color: #ffffff;
+    background-image: none;
+    position: absolute;
+    border: 1px solid #000 !important;
+    margin-top: 0px;
+    z-index: 3;
+}
+.makeMenuChild {
+    display: none;
+    position: absolute;
+    width: 14em;
+    background-color: #ffffff;
+    background-image: none;
+    position: absolute;
+    border: 1px solid #666 !important;
+    margin-top: 0px;
+    z-index: 3;
+}
+.makeMenuChild li {
+    padding: 0 !important
+}
+ul.makeMenu li a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 6px;
+    color: #2F7FAB !important;
+}
+ul.makeMenu li a:active {
+    outline: none
+}
+ul.makeMenu li a:hover, ul.makeMenu li a.CSStoHighLink {
+    color: #000 !important
+}
+ul.makeMenu li:hover > a {
+    color: #000
+}
+ul.makeMenu li.menuClose {
+    display: block;
+    height: 100%;
+    font-size: .9em;
+    font-weight: bold;
+    border-bottom: 1px solid blue;
+}
+ul.makeMenu li.menuClose:hover {
+    border-bottom: 1px solid green
+}
+ul.makeMenu li.menuClose a {
+    display: block;
+    color: blue !important;
+    text-align: right;
+    text-decoration: none !important;
+    height: 20px;
+    padding: 3px 0;
+    outline: none;
+}
+ul.makeMenu li.menuClose a:hover {
+    color: green !important;
+    text-decoration: none !important;
+}
+.centerLines td {
+    vertical-align: middle
+}
+.menuOpen {
+    cursor: pointer
+}
+#davdocs_step1 {
+    border: 1px solid #eee;
+    padding: 1em;
+    background-color: #FFFCE9;
+}
+#davdocs_step2 {
+    margin-top: 1.2em;
+    border: 1px solid #eee;
+    padding: 1em;
+    background-color: #EBFFE8;
+}
+#davdocs_step2 ul {
+    list-style-type: none
+}
+#davdocs_step2 ul li {
+    display: inline;
+    margin-right: 1.5em;
+}
+.webdav_os {
+    margin-top: 1em;
+    border: 1px solid #eee;
+    padding: 1em 2em;
+}
+/* ===[ Lessons ]=== */
+.lessonsHeader {
+    width: 99%;
+    border-bottom: 2px solid #2F7FAB !important;
+    border-radius: 3px !important;
+    height: 25px;
+}
+.lessonsHeader .title {
+    display: inline-block;
+    margin: 2px 0 0 2px;
+    font-size: 1.3em;
+}
+/* ===[ New alerts ]=== */
+.validationEmbedded, .validation, .alertMessage {
+}
+.information {
+}
+/* override native button things rendering */
+.ui-button,
+a.button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    cursor: pointer;
+    background: #E7E7EB !important;
+    font-weight: normal !important;
+    min-height: 26px !important;
+    color: #555 !important;
+    font-size: 1em !important;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    border: none;
+    border: 1px solid #DBDCDE !important;
+
+    margin-right: 2px;
+
+    border-radius: 0 !important;
+}
+h2 input[type="submit"],
+h2 input[type="button"],
+h2 input[type="reset"] {
+  font-size: 0.8em !important;
+}
+.ui-button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    background: #FFF !important;
+    color: #2F7FAB !important;
+    border-color: #2F7FAB !important;
+}
+
+.button.active,
+a.button.active,
+button.active,
+input[type="button"].active,
+input[type="submit"].active,
+input[name="eventSubmit_doSearch"],
+input[name=":submit"],
+#siteStatus a,
+input[value="Publish entry"] {
+  -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  background: #3698DB !important;
+  color: #FFF !important;
+  border-color: #3698DB !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
+
+.button.active:hover,
+a.button.active:hover,
+button.active:hover,
+input[type="button"].active:hover,
+input[type="submit"].active:hover,
+input[name="eventSubmit_doSearch"]:hover,
+input[name=":submit"]:hover, #siteStatus a:hover,
+input[value="Publish entry"]:hover {
+  -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  background: #FFF !important;
+  color: #2F7FAB !important;
+  border-color: #2F7FAB !important;
+}
+.button.cancel, a.button.cancel, button.cancel, input[type="button"][value*="Cancel"], input[type="submit"][value*="Cancel"], button[name="eventSubmit_doCancel"], input#reset, .actionItem a#restdef {
+  cursor: pointer !important;
+}
+.navIntraTool.actionToolBar .inputItem input {
+  padding: 4px !important;
+  border: 1px solid #DBDCDE !important;
+}
+input[type="submit"][disabled="disabled"],
+  input[type="button"][disabled="disabled"],
+  input[type="submit"][disabled="true"],
+  input[type="button"][disabled="true"],
+  input[type="submit"][disabled],
+  input[type="button"][disabled],
+  input[type="submit"][class="disabled"],
+  input[type="button"][class="disabled"],
+  input[type="submit"][disabled="disabled"]:hover,
+  input[type="button"][disabled="disabled"]:hover,
+  input[type="submit"][disabled="true"]:hover,
+  input[type="button"][disabled="true"]:hover,
+  input[type="submit"][disabled]:hover,
+  input[type="button"][disabled]:hover,
+  input[type="submit"][class="disabled"]:hover,
+  input[type="button"][class="disabled"]:hover {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    background: #E7E7EB !important;
+    color: #bbb !important;
+    border: 1px solid #E0E3E5 !important;
+    margin-left: 0 !important;
+}
+input[type="checkbox"][disabled="disabled"],
+input[type="checkbox"][disabled="true"],
+input[type="checkbox"][class="disabled"],
+input[type="checkbox"][disabled="disabled"]:hover,
+input[type="checkbox"][disabled="true"]:hover {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    background: #DBDCDE !important;
+    border: 1px solid #E0E3E5 !important;
+}
+.listNav input[type="submit"], .listNav input[type="button"] {
+    height: 20px !important
+}
+@media screen and (max-device-width: 480px) {
+.login td.logo {
+    width: 175px;
+    background: #fff url(images/x-login-logo-sm.png) no-repeat;
+    background-position: 10px 20px;
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: #DBDCDE;
+}
+
+}
+
+/* https://jira.sakaiproject.org/browse/SAK-23662 Date/Time Picker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+#helpSearchForm {
+  padding: 6px;
+}
+#helpSearchForm\\:searchField {
+  width: 100px;
+  padding-right: 6px;
+}
+
+
+/* Tool icons */
+
+@font-face {
+    font-family:"nyu-classes-icons";
+    src:url(fonts/nyu-classes-icons.eot);
+    src:url(fonts/nyu-classes-icons.eot?#iefix) format("embedded-opentype"),url(fonts/nyu-classes-icons.woff) format("woff"),url(fonts/nyu-classes-icons.ttf) format("truetype"),url(fonts/nyu-classes-icons.svg#nyu-classes-icons) format("svg");
+    font-weight:400;
+    font-style:normal
+}
+
+[class*="icon-sakai"],
+[class*="icon-nyu"] {
+    font-family:"nyu-classes-icons";
+}
+
+[class*="icon-sakai"]:before,
+[class*="icon-nyu"]:before,
+.icon-sakai-help:before,
+.icon-sakai-iframe-site:before,
+.icon-sakai-motd:before,
+.icon-sakai-schedule:before,
+.icon-sakai-announcements:before,
+.icon-sakai-resources:before,
+.icon-sakai-assignment-grades:before,
+.icon-sakai-dropbox:before,
+.icon-sakai-chat:before,
+.icon-sakai-mailbox:before,
+.icon-sakai-siteinfo:before,
+.icon-sakai-sitesetup:before,
+.icon-sakai-messages:before,
+.icon-sakai-realms:before,
+.icon-sakai-memory:before,
+.icon-sakai-sites:before,
+.icon-sakai-users:before,
+.icon-sakai-su:before,
+.icon-sakai-profile2:before,
+.icon-sakai-membership:before,
+.icon-sakai-preferences:before,
+.icon-sakai-singleuser:before,
+.icon-sakai-syllabus:before,
+.icon-sakai-forums:before,
+.icon-sakai-iframe:before,
+.icon-sakai-lessonbuildertool:before,
+.icon-sakai-samigo:before,
+.icon-sakai-gradebook-tool:before,
+.icon-sakai-blogwow:before,
+.icon-sakai-sections:before,
+.icon-sakai-kaltura:before,
+.icon-sakai-sitestats:before,
+.icon-sakai-delegatedaccess:before,
+.icon-sakai-site-roster:before,
+.icon-sakai-site-roster2:before,
+.icon-sakai-news:before,
+.icon-sakai-turningtool:before,
+.icon-sakai-subsite:before,
+.icon-nyu-libraries:before,
+.icon-nyu-ls-music-resources:before,
+.icon-nyu-mediasite-poly:before,
+.icon-nyu-mediasite-engineering:before,
+.icon-nyu-mediasite-stern:before,
+.icon-nyu-mediasite-libraries:before,
+.icon-nyu-panopto-law:before,
+.icon-nyu-panopto-poly:before,
+.icon-nyu-panopto-engineering:before,
+.category-title-information:before,
+.category-title-communication:before,
+.category-title-content:before,
+.category-title-activities-and-assessment:before,
+.category-title-utilities:before,
+#toggleToolMax:after,
+#toggleNormal:after,
+.icon-home:before {
+    margin:0 .25em 0 0;
+    padding:.25em;
+    font-family:"nyu-classes-icons" !important;
+}
+
+[class*="icon-sakai"]:before,
+[class*="icon-nyu"]:before {
+    content:"\e60d"
+}
+
+.icon-sakai-edit:before {
+    content:"\e025"
+}
+
+.icon-sakai-help:before {
+    content:"\e003"
+}
+
+.icon-home:before {
+    font-family:"nyu-classes-icons";
+    content:"\e005";
+}
+
+.icon-sakai-iframe-site:before {
+    content:"\e005"
+}
+
+.icon-sakai-motd:before {
+    content:"\e005"
+}
+
+.icon-sakai-schedule:before {
+    content:"\e028"
+}
+
+.icon-sakai-announcements:before {
+    content:"\e006"
+}
+
+.icon-sakai-resources:before {
+    content:"\e01e"
+}
+
+.icon-sakai-assignment-grades:before {
+    content:"\e00e"
+}
+
+.icon-sakai-dropbox:before {
+    content:"\e021"
+}
+
+.icon-sakai-mailbox:before {
+    content:"\e032"
+}
+
+.icon-sakai-siteinfo:before {
+    content:"\e034"
+}
+
+.icon-sakai-sitesetup:before {
+    content:"\e603"
+}
+
+.icon-sakai-realms:before {
+    content:"\e03a"
+}
+
+.icon-sakai-realms:before {
+    content:"\e03a"
+}
+
+.icon-sakai-memory:before {
+    content:"\e04a"
+}
+
+.icon-sakai-sites:before {
+    content:"\e038"
+}
+
+.icon-sakai-users:before {
+    content:"\e02a"
+}
+
+.icon-sakai-su:before {
+    content:"\e02e"
+}
+
+.icon-sakai-profile2:before {
+    content:"\e029"
+}
+
+.icon-sakai-membership:before, .icon-sakai-joinable-groups:before {
+    content:"\e02a"
+}
+
+.icon-sakai-preferences:before {
+    content:"\e034"
+}
+
+.icon-sakai-singleuser:before {
+    content:"\e02b"
+}
+
+.icon-sakai-syllabus:before {
+    content:"\e017"
+}
+
+.icon-sakai-iframe:before {
+    content:"\e60f"
+}
+
+.icon-sakai-lessonbuildertool:before {
+    content:"\e60b"
+}
+
+.icon-nyu-libraries:before {
+    content:"\e051"
+}
+
+.icon-nyu-ls-music-resources:before {
+    content:"\e009"
+}
+
+
+.icon-sakai-samigo:before {
+    content:"\e60c"
+}
+
+.icon-sakai-gradebook-tool:before {
+    content:"\e050"
+}
+
+.icon-sakai-blogwow:before {
+    content:"\e043"
+}
+
+.icon-sakai-kaltura:before {
+    content:"\e04f"
+}
+
+.icon-sakai-sitestats:before {
+    content:"\e035"
+}
+
+.icon-sakai-delegatedaccess:before {
+    content:"\e02e"
+}
+
+.icon-sakai-site-roster:before {
+    content:"\e052"
+}
+
+.icon-sakai-site-roster2:before {
+    content:"\e052"
+}
+
+.icon-sakai-news:before {
+    content:"\e053"
+}
+
+.icon-sakai-turningtool:before {
+    content:"\e054"
+}
+
+.icon-sakai-subsite:before {
+    content:""
+}
+
+
+.icon-sakai-rwiki:before {
+    content:"\e038"
+}
+
+.icon-sakai-bbb:before {
+    content:"\e03C"
+}
+
+.icon-sakai-dashboard:before {
+    content:"\e036"
+}
+
+.icon-sakai-mailtool:before {
+    content:"\e05D"
+}
+
+.icon-sakai-rsf-evaluation:before {
+    content:"\e046"
+}
+
+.icon-sakai-basiclti:before {
+    content:"\e037"
+}
+
+.icon-sakai-scorm-tool:before {
+    content:"\e602"
+}
+
+.icon-nyu-mediasite-poly:before,
+.icon-nyu-mediasite-engineering:before,
+.icon-nyu-mediasite-stern:before,
+.icon-nyu-mediasite-libraries:before,
+.icon-nyu-panopto-law:before,
+.icon-nyu-panopto-poly:before,
+.icon-nyu-panopto-engineering:before {
+    content:"\e04F"
+}
+
+.icon-sakai-podcasts:before {
+    content:"\e02F"
+}
+
+.icon-sakai-poll:before {
+    content:"\e03E"
+}
+
+.icon-sakai-scorm-singlepackage-tool:before {
+    content:"\e602"
+}
+
+.icon-sakai-search:before {
+    content:"\e048"
+}
+
+.icon-sakai-signup:before {
+    content:"\e02A"
+}
+
+.icon-sakai-messages:before {
+    content:"\e05D"
+}
+
+.icon-sakai-chat:before {
+    content:"\e030"
+}
+
+.icon-sakai-sections:before {
+    content:"\e601"
+}
+
+.icon-sakai-forums:before {
+    content:"\e02C"
+}
+
+.icon-sakai-attendance:before {
+    content: '';
+    background-image: url('images/hand-paper-o.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.icon-sakai-groupersync:before {
+    content: '';
+    background-image: url('images/google-groups-icon.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.icon-nyu-briteclass:before {
+    content: '';
+    background-image: url('images/briteclass-icon.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+/* Fix the display when the tool is selected in Add/Edit tools. */
+#toolSelectionList .icon-sakai-attendance:before,
+#toolSelectionList .icon-sakai-groupersync:before,
+#toolSelectionList .icon-nyu-briteclass:before {
+    float: left;
+    margin-top: 0.4em;
+}
+
+.radioOptionSelected {
+  background: #D6E4F4;
+}
+span.cke_bottom {
+    height: 33px;
+}
+span.cke_bottom:after {
+    content: 'Ctrl/Command+Right-Click to access the editor\'s context menu';
+    position: absolute;
+    bottom: 3px;
+    left: 13px;
+    text-shadow: 1px 1px 1px #FFF;
+}
+
+span.cke_bottom .cke_resizer.cke_resizer_ltr {
+    position: relative;
+    top: 13px;
+}
+
+#toolSelectionList ul li {
+    background: none !important;
+    padding-left: 5px !important;
+}
+
+/* Override dropzone styles */
+.dropzone {
+  border: 4px dashed #DBDCDE !important;
+  background: none !important;
+  font-size: 16px;
+}
+.dz-message:before {
+  content: "Choose files to upload";
+  position: absolute;
+  top: 4em;
+  width: 200px;
+  margin-left: -100px;
+  left: 50%;
+  border: 1px solid #2F7FAB;
+  background-color: #2F7FAB;
+  color: #FFF;
+  padding: 4px 8px;
+}
+.dz-message:hover:before {
+  background-color: #FFF;
+  color: #2F7FAB;
+}
+.dz-message:after {
+  content: "or";
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  width: 20px;
+  margin-left: -10px;
+  color: #999;
+}
+.dz-message {
+  background: none !important;
+  text-align: center;
+}
+
+
+/* Customize Tabs */
+/* CLASSES-1441 Fix sites moved into the empty area slot in under that empty box.*/
+#prefs_form .col1,
+#prefs_form .col2,
+#prefs_form .col3 {
+  min-height: 350px;
+  border: 1px solid #DDD;
+  margin-right: 1% !important;
+}
+#prefs_form .colTitle {
+  min-height: 62px;
+  border-bottom: 1px solid #EEE;
+}
+#prefs_form #reorderCol3 > span {
+  outline: none !important;
+}
+#prefs_form #reorderCol1 > span,
+#prefs_form #reorderCol2 > span,
+#prefs_form #reorderCol3 > span {
+  min-height: initial !important;
+  height: auto !important;
+}
+/* CLASSES-1441 Reduce space between Update Preferences button and "Mouse Instructions" by half */
+#prefs_form #layoutReorderer p:first-child {
+  margin-top: 0;
+}
+/* Time Zone/Langauge */
+/* CLASSES-1441 increase font size of selects */
+#timezone_form select,
+#locale_form select {
+  font-size: 1em;
+}
+
+
+/* CLASSES-1447 Bring across 2.8.1 new-york-u-2 input styles */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+/* line 63, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+button,
+input {
+  line-height: normal;
+}
+
+/* line 73, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+button,
+select {
+  text-transform: none;
+}
+
+/* line 90, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 101, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/* line 113, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* line 126, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 137, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 144, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 152, ../../../../.gems/gems/compass-normalize-1.4.3/stylesheets/normalize/_forms.scss */
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+input[type="search"]::-webkit-search-decoration {
+  display: none;
+}
+
+/* line 52, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input:invalid,
+button:invalid,
+a.button:invalid,
+select:invalid,
+textarea:invalid {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* line 56, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input:focus,
+button:focus,
+a.button:focus,
+select:focus,
+textarea:focus {
+  -webkit-box-shadow: #0066ff 0 0 5px 0;
+  -moz-box-shadow: #0066ff 0 0 5px 0;
+  box-shadow: #0066ff 0 0 5px 0;
+  z-index: 1;
+}
+
+/* line 64, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input[type="file"]:focus, input[type="file"]:active,
+input[type="radio"]:focus,
+input[type="radio"]:active,
+input[type="checkbox"]:focus,
+input[type="checkbox"]:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+  background-color: white;
+  border: 1px solid;
+  border-color: #848484 #c1c1c1 #e1e1e1;
+  color: black;
+  outline: 0;
+  margin: 0;
+  padding: 2px 3px;
+  text-align: left;
+  font-size: 13px;
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+  height: 1.8em;
+  vertical-align: top;
+}
+/* line 163, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+textarea[disabled],
+select[disabled],
+input[type="date"][disabled],
+input[type="datetime"][disabled],
+input[type="datetime-local"][disabled],
+input[type="email"][disabled],
+input[type="month"][disabled],
+input[type="number"][disabled],
+input[type="password"][disabled],
+input[type="search"][disabled],
+input[type="tel"][disabled],
+input[type="text"][disabled],
+input[type="time"][disabled],
+input[type="url"][disabled],
+input[type="week"][disabled] {
+  background-color: #eeeeee;
+}
+
+/* line 166, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+button[disabled],
+input[disabled],
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled],
+a.button_disabled {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  color: #888888;
+  cursor: default;
+}
+
+/* line 184, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #888888;
+}
+
+/* line 188, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #888888;
+}
+
+/* line 192, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+input.placeholder_text,
+textarea.placeholder_text {
+  color: #888888;
+}
+
+/* line 196, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+textarea,
+select[size],
+select[multiple] {
+  height: auto;
+}
+
+/* line 203, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+select[size="0"],
+select[size="1"] {
+  height: 1.8em;
+}
+
+@media (-webkit-min-device-pixel-ratio: 0) {
+  /* line 212, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+  select[size],
+  select[multiple],
+  select[multiple][size] {
+    background-image: none;
+    padding-right: 3px;
+  }
+
+  /* line 218, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+  select,
+  select[size="0"],
+  select[size="1"] {
+    background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 20px;
+  }
+
+  /* line 227, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+  ::-webkit-validation-bubble-message {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #666666), color-stop(1, black));
+    border: 0;
+    color: white;
+    font: 13px/17px "Lucida Grande", Arial, "Liberation Sans", FreeSans, sans-serif;
+    overflow: hidden;
+    padding: 15px 15px 17px;
+    text-shadow: black 0 0 1px;
+    min-height: 16px;
+  }
+
+  /* line 239, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+  ::-webkit-validation-bubble-arrow,
+  ::-webkit-validation-bubble-top-outer-arrow,
+  ::-webkit-validation-bubble-top-inner-arrow {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #666666;
+    border-color: #666666;
+  }
+}
+/* line 247, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+textarea {
+  min-height: 40px;
+  overflow: auto;
+  resize: vertical;
+  width: 100%;
+}
+
+/* line 253, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+optgroup {
+  color: black;
+  font-style: normal;
+  font-weight: normal;
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+}
+/* line 262, ../../../../.gems/gems/compass_formalize-0.0.5/stylesheets/_formalize.sass */
+optgroup::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 5, sass/base/forms/_forms_extendables.scss */
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+textarea,
+select {
+  vertical-align: baseline;
+  background-color: white;
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+}
+/* line 12, sass/base/forms/_forms_extendables.scss */
+input[type]:focus,
+textarea:focus,
+select:focus {
+  border-color: #333333;
+}
+
+/* line 8, sass/base/forms/_forms.scss */
+label {
+  cursor: pointer;
+}
+
+/* line 21, sass/base/forms/_forms.scss */
+input[type="checkbox"],
+input[type="radio"],
+input[type="image"] {
+  margin: .25em .25em 0 .05em;
+}
+/* line 28, sass/base/forms/_forms.scss */
+input[type="checkbox"] + label,
+input[type="radio"] + label,
+input[type="image"] + label {
+  display: inline;
+  margin-right: 1em;
+}
+/* line 33, sass/base/forms/_forms.scss */
+input[type="checkbox"]:focus + label,
+input[type="radio"]:focus + label,
+input[type="image"]:focus + label {
+  background: #faedab;
+}
+/* line 37, sass/base/forms/_forms.scss */
+input[type="checkbox"][disabled] + label,
+input[type="radio"][disabled] + label,
+input[type="image"][disabled] + label {
+  color: #888;
+}
+
+/* line 43, sass/base/forms/_forms.scss */
+input[required],
+textarea[required] {
+  border-color: #666666;
+}
+
+/* line 63, sass/base/forms/_forms.scss */
+.shorttext,
+.longtext,
+.filepicker {
+  border: none;
+  margin: 1em;
+}
+
+/* line 70, sass/base/forms/_forms.scss */
+p.radio,
+p.checkbox {
+  margin: .25em 0;
+}
+
+/* line 101, sass/base/forms/_forms.scss */
+.reqStar {
+  color: red !important;
+  float: left;
+  margin-right: .25em;
+}
+
+/* line 107, sass/base/forms/_forms.scss */
+.reqStarInline {
+  color: red;
+}
+
+/* line 112, sass/base/forms/_forms.scss */
+img[src$="cal.gif"] {
+  margin: 0 .25em;
+}
+
+/* line 116, sass/base/forms/_forms.scss */
+.pager {
+  white-space: nowrap;
+  display: inline-block;
+  margin: 1em 0;
+}
+
+/* line 122, sass/base/forms/_forms.scss */
+#userlistForm .sectionContainerNav {
+  width: auto !important;
+}
+/* line 127, sass/base/forms/_forms.scss */
+#userlistForm .sectionContainerNav .left label {
+  margin: 0 .5em 0 0;
+}
+/* line 132, sass/base/forms/_forms.scss */
+#userlistForm .sectionContainerNav .right {
+  vertical-align: top;
+  text-align: left;
+}
+/* line 136, sass/base/forms/_forms.scss */
+#userlistForm .sectionContainerNav .right .act {
+  margin: 1.25em;
+}
+/* line 139, sass/base/forms/_forms.scss */
+#userlistForm .sectionContainerNav .right .act input {
+  margin: 0 .5em 0 0;
+}
+
+
+/* CLASSES-1454 */
+#participantForm #siteMembers input[name=selectedUser] {
+  float: right;
+}
+
+
+/* CLASSES-1457 */
+.chat-block, .chat-select-date {
+  margin: 20px 0;
+}
+.chat-block label {
+  margin: 0 10px;
+}
+
+
+/* CLASSES-1465 */
+.ui-widget-overlay {
+  background: #333 !important;
+}
+.ui-state-hover,
+.ui-state-focus,
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  color: #3698DB !important;
+  border-color: #2F7FAB !important;
+}
+.ui-widget-header {
+  background: #2F7FAB !important;
+  border-color: #2F7FAB !important;
+  color: #FFF !important;
+}
+
+.ui-widget-content {
+  background: #FAFAFA !important;
+}
+.toggleAnchor {
+  background: 
+}
+.ui-dialog .ui-dialog-content {
+  padding: 0 !important;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  right: 7px !important;
+  width: 24px !important;
+  margin: -13px 0 0 0 !important;
+  padding: 0 !important;
+  height: 24px !important;
+}
+
+
+/* CLASSES-1463 */
+table.tablesorter .header {
+  padding-right: 16px;
+  cursor: pointer;
+}
+
+
+/* CLASSES-1460 */
+.neoPortletTitleWrap {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0 !important;
+}
+.neoPortletTitleWrap .portletTitle .title {
+  padding: 2px 2px 4px;
+  float: left;
+  color: #000;
+  height: auto !important;
+}
+.neoPortletTitleWrap .portletTitle .title img {
+    margin: 0;
+    vertical-align: text-bottom;
+    width: 18px;
+    border: none;
+    height: 18px;
+}
+.neoPortletTitleWrap .portletTitle .title h2 {
+    display: inline;
+    margin: 0 0 0 2px;
+    padding: 0;
+    color: #444;
+    font-weight: normal;
+    font-family:  'Helvetica Neue','Arial',sans-serif !important;
+    font-size: 1.5em !important;
+}
+.neoPortletTitleWrap .portletTitle .title h2 .siteTitle {
+    color: #333;
+    display: none;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    font-family: 'nyu-classes-icons';
+    color: #444;
+    vertical-align: text-bottom;
+    font-size: 16px;
+    padding: 4px 4px;
+    margin: 0;
+    font-size: 0;
+    display: inline-block;
+    height: 18px !important;
+
+    border: 1px solid #DBDCDE !important;
+    background: #E7E7EB !important;
+    color: #444 !important;
+    vertical-align: initial;
+    margin-right: 10px;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload:hover {
+    -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    background: #ffffff !important;
+    color: #2F7FAB !important;
+    border-color: #2F7FAB !important;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload img {
+  display: none;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload:before {
+  content: '\e628';
+  font-size: 18px;
+  font-family: 'nyu-classes-icons';
+  display: inline-block;
+  margin-left: 5px;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload:after {
+  -webkit-transition: width 0.5s, transform 0.5s;
+  -moz-transition: width 0.5s;
+  -ms-transition: width 0.5s;
+  -o-transition: width 0.5s;
+  transition: width 0.5s;
+  
+  display: inline-block;
+  width: 0;
+  content: 'Return to Tool Home';
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 18px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload:hover:after {
+  -webkit-transition: width 0.5s;
+  -moz-transition: width 0.5s;
+  -ms-transition: width 0.5s;
+  -o-transition: width 0.5s;
+  transition: width 0.5s;
+
+  -webkit-transition-delay: 0.5s;
+  -moz-transition-delay: 0.5s;
+  -ms-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+
+  width: 120px;
+  height: auto;
+}
+.neoPortletTitleWrap .portletTitle .title a.reload:hover:after {
+  content: 'Return to Tool Home';
+  font-size: 12px;
+  font-family:  'Helvetica Neue','Arial',sans-serif;
+}
+.neoPortletTitleWrap .portletTitle .ui-button-text {
+  font-size: 1em !important;
+  font-weight: normal !important;
+  padding: 4px 8px !important;
+}
+.neoPortletTitleWrap .portletTitle .action a.help {
+  -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  text-align: left;
+  text-decoration: none !important;
+  padding: 0 6px;
+  line-height: 26px;
+  height: 26px;
+  width: auto;
+  vertical-align: top;
+
+  background: none !important;
+  color: #444;
+  font-size: 18px;
+
+  border: 1px solid #DBDCDE;
+  background: #E7E7EB !important;
+  color: #444 !important;
+  display: inline-block;
+  margin: 0;
+}
+.neoPortletTitleWrap .portletTitle .action a.help:hover {
+  -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -moz-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -ms-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  -o-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  background: #ffffff !important;
+  color: #2F7FAB !important;
+  border-color: #2F7FAB !important;
+}
+.neoPortletTitleWrap .portletTitle .action a.help:before {
+  font-family: 'nyu-classes-icons';
+  content: '\e003';
+}
+.neoPortletTitleWrap .portletTitle .action a.help:after {
+  content: 'Get Help with this Tool';
+  font-size: 14px;
+  line-height: 27px;
+  vertical-align: inherit;
+  padding: 0 0 0 2px;
+  color: #555555;
+}
+.neoPortletTitleWrap .portletTitle .action a.help:hover:after {
+  color: #2F7FAB;
+}
+.neoPortletTitleWrap .portletTitle .action img {
+    display: none;
+}
+
+
+/* CLASSES-1470 */
+form[name="classInformationForm"] input#title {
+  width: 60%;
+  max-width: 400px;
+  font-size: 1em;
+  padding: 5px;
+}
+
+
+/* CLASSES-1513 */
+.ui-tabs-nav.ui-widget-header {
+  background: #F6F6F6 !important;
+  border-radius: 0 !important;
+  border-bottom-color: #828282 !important;
+}
+
+.ui-tabs.ui-widget-content,
+.ui-tabs-panel.ui-widget-content {
+  background: #FFFFFF !important;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-state-active {
+  border-color: #828282 !important;
+  border-bottom: none !important;
+  top: 1px;
+}
+
+
+/* CLASSES-1469 */
+.site-manage-import-sessions,
+.site-manage-import-other {
+  display: table-cell;
+  width: 50%;
+}
+
+
+/* Fix scrollbar on LessonBuilder iframe - replicate .skip styles for .offscreen */
+.offscreen {
+  outline: 1px solid transparent;
+  display: inline !important;
+  position: fixed !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+  top: 0px !important;
+  left: 0px;
+  padding: 0px 0px 0px 0px !important;
+}
+
+/* CLASSES-1539 Lesson Builder */
+.mainList li.canEdit > div.edit-col {
+  padding-top: 0 !important;
+}
+
+.mainList li.canEdit > div.edit-col .usebutton {
+  min-height: auto !important;
+  padding: 2px 0 !important;
+}
+.portletTitle .title > span.returnheader.nextprev {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.portletTitle .title > span.returnheader.nextprev a {
+  margin-left: 0;
+}
+span.returnheader.nextprev a {
+  background: #E7E7EB !important;
+}
+span.returnheader.nextprev a:hover {
+  background: #FFF !important;
+}
+.portletTitle .title > span.returnheader.nextprev a:after {
+  content: '';
+  display: none;
+}
+.portletTitle .title > span.returnheader.nextprev a:after:hover {
+  content: '';
+  display: none;
+}
+
+/* SU-81 */
+#toolSelectionList ul li {
+  font-family:  'Helvetica Neue','Arial',sans-serif !important;
+}
+
+/* SU-95 */
+.time-picker {
+  margin-top: 27px;
+}
+#bbb_container .time-picker-field {
+  width: 60px !important;
+}
+#bbb_container .date-picker-field {
+  width: 120px !important;
+}
+#datepick-div .datepick-header {
+  height: 25px !important;
+  padding: 2px 0 !important;
+}
+#datepick-div .datepick-new-month {
+  margin-right: 4px !important;
+}
+#datepick-div .datepick-new-month,
+#datepick-div .datepick-new-year {
+  background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==) !important;
+  background-repeat: no-repeat !important;
+  background-position: right center !important;
+
+  background-color: white !important;
+  color: #444 !important;
+  border: 1px solid #888 !important;
+}
+#datepick-div .datepick-days-cell.datepick-current-day a {
+  background-color: #15A885 !important;
+  color: #FFF !important
+}
+
+/* CLASSES-1567 */
+.ui-widget-content a {
+  color: #3698DB !important;
+}
+
+/* CLASSES-1725 Evaluation Tool (expanding on old CLASSES-636/CLASSES-662 for previous skin) */
+.evaluation-page {
+  background-color: #F6F6F6;
+}
+.evaluation-page .portletBody {
+  clear: both;
+  padding: 0;
+}
+.evaluation-page .evaluation-header {
+  background: #57068c;
+  overflow: hidden;
+  margin: -1em -1em 0;
+  padding: 5px 0;
+  position: relative;
+}
+.evaluation-page .evaluation-logo1:before {
+  font-family: 'nyu-classes-icons';
+  content: '\e000';
+  color: #FFFFFF;
+  font-size: 70px;
+  line-height: 60px;
+}
+.evaluation-page .evaluation-logo2 {
+  display: none;
+}
+.evaluation-page .evaluation-title-wrapper {
+  clear: both;
+  background-color: #F0F0F0;
+  margin: 0 -1em;
+  padding: 1em;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #DDD;
+}
+.evaluation-page .evaluation-title-wrapper h1 {
+  margin-top: 0;
+}
+.evaluation-page .evaluation-title-wrapper h3 {
+  font-size: 1.8em;
+}
+.evaluation-page .evaluation-outer-wrapper {
+  padding: 1em;
+}
+.evaluation-page .evaluation-inner-wrapper {
+  background-color: white;
+  padding: 1em;
+  box-shadow: 1px 1px 6px #333;
+}
+.evaluation-page .itemListNew legend {
+  color: #57068c !important;
+  font-size: 1.2em !important;
+}
+.evaluation-page .fullVertical li:hover, 
+.evaluation-page .fullDisplayHorizontal li:hover {
+  background-color: #f5f0f8 !important;
+}
+.evaluation-page .fullVertical li.checked, 
+.evaluation-page .fullDisplayHorizontal li.checked {
+  background-color: #f5f0f8 !important;
+}
+.evaluation-page .eval-title .eval-title-label {
+  color: #57068c !important;
+}
+.evaluation-page .eval-group {
+  font-size: 1.6em;
+}
+.evaluation-page .eval-group .eval-group-label {
+  color: #57068c !important;
+}
+.evaluation-page #mastLogin {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  text-align: right;
+  padding: 0 15px;
+  margin: -1em 1em 0 0;
+}
+.evaluation-page #mastLogin a,
+.evaluation-page #mastLogin a:visited{
+  margin-top: 0;
+  text-decoration: none;
+  background: none repeat scroll 0 0 #F29C0F !important;
+  border: 1px solid #F29C0F !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  display: block;
+  font-size: 13px !important;
+  padding: 4px 6px;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Helvetica Neue','Arial',sans-serif !important;
+  font-weight: normal !important;
+}
