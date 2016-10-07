@@ -7,10 +7,10 @@ using namespace std;
 class HomophonicSolver
 {
 public:
-	HomophonicSolver(vector<string> dictionaryFile);
+	HomophonicSolver(vector<string> dictionaryFile, vector<string> messageArray);
 	~HomophonicSolver();
 
-	string analyse(vector<string> inputArray);
+	string analyse(string cipherText);
 
 	vector<string> outerHillClimb(vector<string> cipherText);
 
@@ -26,5 +26,6 @@ private:
 	size_t restarts = 40;
 	void getDigrams(vector<string>& dictionary, size_t digramMap[26][26]); 
 	size_t diffDictionaries(size_t firstMap[26][26], size_t secondMap[26][26]);
+	string& decrypt(string& cipherText, char key[103]);
 };
 

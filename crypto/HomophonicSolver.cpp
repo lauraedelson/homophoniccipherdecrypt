@@ -4,7 +4,7 @@
 
 
 
-HomophonicSolver::HomophonicSolver(vector<string> dictionaryFile)
+HomophonicSolver::HomophonicSolver(vector<string> dictionaryFile, vector<string> messageArray)
 {
 	getDigrams(dictionaryFile, englishDigrams);
 }
@@ -14,20 +14,17 @@ HomophonicSolver::~HomophonicSolver()
 {
 }
 
-string HomophonicSolver::analyse(vector<string> inputArray)
+string HomophonicSolver::analyse(string cipherText)
 {
-	size_t cipherDigrams[103][103];
-	for (int i = 0; i < 103; i++) {
-		for (int j = 0; j < 103; j++) {
-			cipherDigrams[i][j] = 0;
-		}
+	size_t cipherDigrams[103][103] = { 0 };
+
+	//build the cipherDigrams matrix
+	for (size_t i = 1; i < cipherText.length(); i++) {
+		cipherDigrams[line[i - 1]][line[i]]++;	
 	}
 
-	for (string line : inputArray) {
-		for (size_t i = 1; i < line.length(); i++) {
-			cipherDigrams[line[i - 1]][line[i]]++;
-		}
-	}
+	//spacing analysis - might it one of our reference strings?
+
 
 	return string();
 }
@@ -83,20 +80,24 @@ size_t HomophonicSolver::innerHillClimb(size_t putativeDict[26][26], char key[10
 	score = diffDictionaries(englishDigrams, putativeDict);
 	for (int i = 0; i < 102; i++) { //note, the 102 here is intentional
 		for (int j = 0; j < 103 - i; j++) {
-			char testKey[103] = key;
-			char temp = testKey[j];
-			testKey[j] = testKey[j + i]; // test for char equality
-			testKey[j + i] = temp;
-			//get digrams for swaped columns
-			testDict = putativeDict;
-			char tempRow = testDict[j];
-			testDict[j] = testDict[j + i];
-			testDict[j + i] = tempRow;//simply swapping columns isn't right, i'm pretty sure
-			size_t testScore = diffDictionaries(englishDigrams, testDict);
+			if (key[j] != key[j + i]) {//if the cipher chars map to the same letter, there's no point
+				char testKey[103] = key;
+				char keyFirst = testKey[i];
+				char keySecond = testKey[j];
+				size_t new_i = keyFirst - 'a';
+				size_t new_j = keySecond - 'a';
+				char temp = testKey[j];
+				testKey[j] = testKey[j + i]; // test for char equality
+				testKey[j + i] = temp;
+				//get digrams for swaped columns
+				testDict = putativeDict;
+				char tempRow = testDict[new_j];
+				testDict[j] = testDict[new_j + new_i];
+				testDict[new_j + new_i] = tempRow;
+				size_t testScore = diffDictionaries(englishDigrams, testDict);
+			}
 		}
 	}
-
-
 	return score;
 }
 
@@ -124,4 +125,11 @@ size_t HomophonicSolver::diffDictionaries(size_t firstDictionary[26][26], size_t
 		}
 	}
 	return score;
+}
+
+string & HomophonicSolver::decrypt(string & cipherText, char key[103])
+{
+	string message = "";
+	while
+	return message;
 }

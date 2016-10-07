@@ -13,6 +13,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	if (sizeof(argv) < 2) {
+		cout << "usage: homophonicsolver englishDIct.txt plaintexts.txt" << endl;
+	}
+
 	ifstream dictFile(argv[1]);
 	vector<string> englishDict = vector<string>();
 	if (dictFile.is_open())
@@ -24,6 +28,7 @@ int main(int argc, char* argv[])
 		}
 		dictFile.close();
 	}
+	else cout << "Unable to open file" << endl;
 
 	vector<string> messageArray = vector<string>();
 	ifstream readFile(argv[2]);
@@ -38,6 +43,6 @@ int main(int argc, char* argv[])
 	}
 	else cout << "Unable to open file" << endl;
 
-	HomophonicSolver solver = HomophonicSolver(englishDict);
+	HomophonicSolver solver = HomophonicSolver(englishDict, messageArray);
 	cout << solver.analyse(messageArray);
-}
+} 
