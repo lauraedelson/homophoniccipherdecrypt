@@ -14,7 +14,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	if (sizeof(argv) < 2) {
-		cout << "usage: homophonicsolver englishDIct.txt plaintexts.txt" << endl;
+		cout << "usage: homophonicsolver englishDict.txt plaintexts.txt" << endl;
 	}
 
 	ifstream dictFile(argv[1]);
@@ -44,5 +44,8 @@ int main(int argc, char* argv[])
 	else cout << "Unable to open file" << endl;
 
 	HomophonicSolver solver = HomophonicSolver(englishDict, messageArray);
-	cout << solver.analyse(messageArray);
+	cout << "Please enter ciphertext" << endl;
+	string ciphertext;
+	cin >> ciphertext;
+	cout << solver.analyse(ciphertext);
 } 

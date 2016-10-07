@@ -16,37 +16,50 @@ HomophonicSolver::~HomophonicSolver()
 
 string HomophonicSolver::analyse(string cipherText)
 {
-	size_t cipherDigrams[103][103] = { 0 };
+	vector<string> tokens;
+	string delim = ",";
+	auto i = 0;
+	auto pos = cipherText.find(delim);
+	while (pos != string::npos) {
+		tokens.push_back(cipherText.substr(i, pos - i));
+		i = ++pos;
+		pos = cipherText.find(delim, pos);
+
+		if (pos == string::npos)
+			tokens.push_back(cipherText.substr(i, cipherText.length()));
+	}
+
+	size_t cipherDigrams[KEY_SIZE][KEY_SIZE] = { 0 };
 
 	//build the cipherDigrams matrix
-	for (size_t i = 1; i < cipherText.length(); i++) {
-		cipherDigrams[line[i - 1]][line[i]]++;	
+	for (size_t i = 0; i < (tokens.size() - 1); i++) {
+		if (tokens[i] != "," && tokens[i + 1] != "," && tokens[i] == " " && tokens[i + 1] == " ") {
+			int first = atoi(tokens[i].c_str());
+			int second = atoi(tokens[i + 1].c_str());
+			cipherDigrams[first][second]++;
+		}	
 	}
 
 	//spacing analysis - might it one of our reference strings?
 
+	string key = getKey(cipherDigrams);
 
-	return string();
+	return decrypt(tokens, key);
 }
 
-vector<string> HomophonicSolver::outerHillClimb(vector<string> cipherText)
-{
-	return vector<string>();
-}
-
-string HomophonicSolver::randomInitialKey(size_t cipherDigrams[103][103])
+string HomophonicSolver::getKey(size_t cipherDigrams[KEY_SIZE][KEY_SIZE])
 {
 	size_t bestScore = INT_MAX;
-	char bestKey[103] = {' '};
-	for (size_t i = 0; i < restarts; i++) {
-		char key[103] = {' '};
+	string bestKey;
+	for (size_t i = 0; i < RESTARTS; i++) {
+		char key[KEY_SIZE] = {' '};
 		//make our random key
-		for (size_t i = 0; i < 26; i++) {
+		for (size_t i = 0; i < ALPHABET_SIZE; i++) {
 			char letter = 'a' + i;
 			for (size_t number = 0; i < frequencyDistribution[i]; i++) {
 				bool success = false;
 				while (success == false){
-					int attempt = rand() % 103;
+					int attempt = rand() % KEY_SIZE;
 					if (key[attempt] == ' ') {
 						key[attempt] = letter;
 						success = true;
@@ -55,9 +68,9 @@ string HomophonicSolver::randomInitialKey(size_t cipherDigrams[103][103])
 			}
 		}
 		//calculate a dict based on that key
-		size_t putativeDict[26][26] = { 0 };
-		for (int i = 0; i < 103; i++) {
-			for (int j = 0; j < 103; j++) {
+		vector<vector<size_t>> putativeDict;
+		for (int i = 0; i < KEY_SIZE; i++) {
+			for (int j = 0; j < KEY_SIZE; j++) {
 				char keyFirst = key[i];
 				char keySecond = key[j];
 				size_t new_i = keyFirst - 'a';
@@ -74,14 +87,14 @@ string HomophonicSolver::randomInitialKey(size_t cipherDigrams[103][103])
 	return bestKey;
 }
 
-size_t HomophonicSolver::innerHillClimb(size_t putativeDict[26][26], char key[103])
+size_t HomophonicSolver::innerHillClimb(vector<vector<size_t>> putativeDict, string key)
 {
 	size_t score = 0;
 	score = diffDictionaries(englishDigrams, putativeDict);
 	for (int i = 0; i < 102; i++) { //note, the 102 here is intentional
-		for (int j = 0; j < 103 - i; j++) {
+		for (int j = 0; j < KEY_SIZE - i; j++) {
 			if (key[j] != key[j + i]) {//if the cipher chars map to the same letter, there's no point
-				char testKey[103] = key;
+				string testKey = key;
 				char keyFirst = testKey[i];
 				char keySecond = testKey[j];
 				size_t new_i = keyFirst - 'a';
@@ -90,8 +103,8 @@ size_t HomophonicSolver::innerHillClimb(size_t putativeDict[26][26], char key[10
 				testKey[j] = testKey[j + i]; // test for char equality
 				testKey[j + i] = temp;
 				//get digrams for swaped columns
-				testDict = putativeDict;
-				char tempRow = testDict[new_j];
+				vector<vector<size_t>> testDict = putativeDict;
+				vector<size_t> tempRow = testDict[new_j];
 				testDict[j] = testDict[new_j + new_i];
 				testDict[new_j + new_i] = tempRow;
 				size_t testScore = diffDictionaries(englishDigrams, testDict);
@@ -101,10 +114,10 @@ size_t HomophonicSolver::innerHillClimb(size_t putativeDict[26][26], char key[10
 	return score;
 }
 
-void HomophonicSolver::getDigrams(vector<string>& dictionary, size_t digramMap[26][26])
+void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<size_t>> digramMap)
 {
-	for (int i = 0; i < 26; i++) {
-		for (int j = 0; j < 26; j++) {
+	for (int i = 0; i < ALPHABET_SIZE; i++) {
+		for (int j = 0; j < ALPHABET_SIZE; j++) {
 			dictionary[i][j] = 0;
 		}
 	}
@@ -117,19 +130,28 @@ void HomophonicSolver::getDigrams(vector<string>& dictionary, size_t digramMap[2
 	}
 }
 
-size_t HomophonicSolver::diffDictionaries(size_t firstDictionary[26][26], size_t secondDictionary[26][26]) {
+size_t HomophonicSolver::diffDictionaries(vector<vector<size_t>> firstDictionary, vector<vector<size_t>> secondDictionary) {
 	size_t score = 0;
-	for (int i = 0; i < 26; i++) {
-		for (int j = 0; j < 26; j++) {
-			score += abs((firstDictionary - secondDictionary));
+	for (int i = 0; i < ALPHABET_SIZE; i++) {
+		for (int j = 0; j < ALPHABET_SIZE; j++) {
+			int diff = firstDictionary[i][j] - secondDictionary[i][j];
+			score += abs(diff);
 		}
 	}
 	return score;
 }
 
-string & HomophonicSolver::decrypt(string & cipherText, char key[103])
+string HomophonicSolver::decrypt(vector<string>& cipherText, string key)
 {
 	string message = "";
-	while
+	for (string token : cipherText) {
+		if (token == " ") {
+			message.append(" ");
+		}
+		else {
+			char val = key[atoi(token.c_str())];
+			message.push_back(val);
+		}
+	}
 	return message;
 }
