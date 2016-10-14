@@ -17,7 +17,9 @@ public:
 	string analyse(string cipherText);
 
 private:
-	vector<vector<size_t>> englishDigrams;
+	vector<vector<size_t>> englishDigrams{ {0} };
+	vector<string> messageArray;
+	vector<string> dictionaryFile;
 	size_t frequencyDistribution[ALPHABET_SIZE] = { 8, 1, 3, 4, 13, 2, 2, 6, 7, 1, 1, 4, 2, 7, 8, 2,1,6,6,9,3,1,2,1,2,1 };
 
 	string getKey(size_t cipherDigrams[KEY_SIZE][KEY_SIZE]);

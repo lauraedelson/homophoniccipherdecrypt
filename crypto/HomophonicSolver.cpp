@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 
 #include "HomophonicSolver.h"
 
@@ -116,16 +117,16 @@ size_t HomophonicSolver::innerHillClimb(vector<vector<size_t>> putativeDict, str
 
 void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<size_t>> digramMap)
 {
-	for (int i = 0; i < ALPHABET_SIZE; i++) {
-		for (int j = 0; j < ALPHABET_SIZE; j++) {
-			dictionary[i][j] = 0;
-		}
-	}
+	digramMap.resize(ALPHABET_SIZE, vector<size_t>(ALPHABET_SIZE, 0));
+	digramMap[0].resize(ALPHABET_SIZE, 0);
 	for (string line : dictionary) {
 		for (size_t i = 1; i < line.length(); i++) {
-			int first = line[i - 1] - 'a';
-			int second = line[i] - 'a';
-			digramMap[first][second]++;
+			size_t first = line[i - 1] - 'a';
+			size_t second = line[i] - 'a';
+			//cout << "first:" << to_string(first) << " second:" << to_string(second) << endl;
+			if (first < ALPHABET_SIZE && second < ALPHABET_SIZE) {
+				digramMap[first][second]++;
+			}
 		}
 	}
 }
