@@ -53,6 +53,8 @@ int main(int argc, char* argv[])
 	HomophonicSolver solver = HomophonicSolver(englishDict, messageArray);
 	cout << "Please enter ciphertext" << endl;
 	string ciphertext;
-	cin >> ciphertext;
+	cin >> noskipws;
+	getline(cin, ciphertext);
 	cout << solver.analyse(ciphertext);
+	exit(EXIT_SUCCESS);
 } 

@@ -5,7 +5,7 @@ using namespace std;
 
 #define ALPHABET_SIZE 26
 #define KEY_SIZE 103
-#define RESTARTS 40
+#define RESTARTS 10
 
 #pragma once
 class HomophonicSolver
@@ -24,7 +24,7 @@ private:
 
 	string getKey(size_t cipherDigrams[KEY_SIZE][KEY_SIZE]);
 	size_t innerHillClimb(vector<vector<size_t>> putativeDict, string key);
-	void getDigrams(vector<string>& dictionary, vector<vector<size_t>> digramMap);
+	void getDigrams(vector<string>& dictionary, vector<vector<size_t>>& digramMap);
 	size_t diffDictionaries(vector<vector<size_t>> firstMap, vector<vector<size_t>> secondMap);
 	string decrypt(vector<string>& cipherText, string key);
 };
