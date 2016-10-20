@@ -82,7 +82,8 @@ string HomophonicSolver::getKey(size_t cipherDigrams[KEY_SIZE][KEY_SIZE])
 				putativeDict[new_i][new_j] += cipherDigrams[new_i][new_j];
 			}
 		}
-		size_t initScore = innerHillClimb(putativeDict, key);
+		string strkey = key;
+		size_t initScore = innerHillClimb(putativeDict, strkey);
 		if (initScore < bestScore) {
 			bestScore = initScore;
 			bestKey = key;
@@ -91,11 +92,11 @@ string HomophonicSolver::getKey(size_t cipherDigrams[KEY_SIZE][KEY_SIZE])
 	return bestKey;
 }
 
-size_t HomophonicSolver::innerHillClimb(vector<vector<size_t>> putativeDict, string key)
+size_t HomophonicSolver::innerHillClimb(vector<vector<size_t>>& putativeDict, string& key)
 {
 	size_t score = 0;
 	score = diffDictionaries(englishDigrams, putativeDict);
-	for (int i = 0; i < 102; i++) { //note, the 102 here is intentional
+	for (int i = 1; i < (KEY_SIZE-1); i++) { //note, the 102 here is intentional
 		for (int j = 0; j < KEY_SIZE - i; j++) {
 			if (key[j] != key[j + i]) {//if the cipher chars map to the same letter, there's no point
 				string testKey = key;
@@ -112,6 +113,11 @@ size_t HomophonicSolver::innerHillClimb(vector<vector<size_t>> putativeDict, str
 				testDict[new_j] = testDict[new_i];
 				testDict[new_i] = tempRow;
 				size_t testScore = diffDictionaries(englishDigrams, testDict);
+				if (testScore < score) {
+					putativeDict = testDict;
+					key = testKey;
+					return innerHillClimb(putativeDict, testKey);
+				}
 			}
 		}
 	}
