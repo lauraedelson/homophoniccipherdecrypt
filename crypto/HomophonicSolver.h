@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include "Sentence.h"
 using namespace std;
 
 #define ALPHABET_SIZE 26
@@ -18,7 +18,7 @@ public:
 
 private:
 	vector<vector<size_t>> englishDigrams{ {0} };
-	vector<string> messageArray;
+	vector<Sentence> decryptedSentences;
 	vector<string> dictionaryFile;
 	size_t frequencyDistribution[ALPHABET_SIZE] = { 8, 1, 3, 4, 13, 2, 2, 6, 7, 1, 1, 4, 2, 7, 8, 2,1,6,6,9,3,1,2,1,2,1 };
 
@@ -28,4 +28,3 @@ private:
 	size_t diffDictionaries(vector<vector<size_t>> firstMap, vector<vector<size_t>> secondMap);
 	string decrypt(vector<string>& cipherText, string key);
 };
-

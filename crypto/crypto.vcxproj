@@ -112,9 +112,11 @@
   <ItemGroup>
     <ClCompile Include="HomophonicSolver.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sentence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HomophonicSolver.h" />
+    <ClInclude Include="Sentence.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

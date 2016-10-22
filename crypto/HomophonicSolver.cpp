@@ -8,6 +8,9 @@
 HomophonicSolver::HomophonicSolver(vector<string> dictionaryFile, vector<string> messageArray)
 {
 	getDigrams(dictionaryFile, englishDigrams);
+	for (string message : messageArray) {
+		decryptedSentences.push_back(Sentence(message));
+	}
 }
 
 
@@ -28,6 +31,17 @@ string HomophonicSolver::analyse(string cipherText)
 
 		if (pos == string::npos)
 			tokens.push_back(cipherText.substr(i, cipherText.length()));
+	}
+	vector<Sentence> candidates;
+	for (Sentence sentence : decryptedSentences) {
+		if (sentence.isCandidate(tokens)) {
+			candidates.push_back(sentence);
+		}
+	}
+
+
+	if (candidates.size() != 0) {
+
 	}
 
 	size_t cipherDigrams[KEY_SIZE][KEY_SIZE] = { 0 };
