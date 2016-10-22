@@ -8,17 +8,18 @@ using namespace std;
 class Sentence
 {
 public:
-	Sentence(string text);
+	Sentence(const string& text);
 	~Sentence();
-	void setDigrams(vector<vector<size_t>>& inDigrams);
-	bool isCandidate(vector<string>& tokens);
+
 	vector<string>& getWords() { return words; };
 	const string& getText() { return text; };
+
+	//evaluate whether the ciphertext specified by the tokens could map to the sentence
+	bool isCandidate(const vector<string>& tokens);
 
 private:
 	const string text;
 	vector<string> words;
-	vector<vector<size_t>> digrams{ { 0 } };
 	string lengths;
 };
 

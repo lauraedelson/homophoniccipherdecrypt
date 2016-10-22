@@ -93,9 +93,6 @@ int main(int argc, char* argv[])
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
     HomophonicSolver solver = HomophonicSolver(englishDict, messageArray);
     cout << "Please enter ciphertext" << endl;
     string ciphertext;

@@ -5,7 +5,7 @@
 
 
 
-HomophonicSolver::HomophonicSolver(vector<string> dictionaryFile, vector<string> messageArray)
+HomophonicSolver::HomophonicSolver(const vector<string>& dictionaryFile, const vector<string>& messageArray)
 {
 	getDigrams(dictionaryFile, englishDigrams);
 	for (string message : messageArray) {
@@ -34,6 +34,8 @@ string HomophonicSolver::analyse(string cipherText)
         if (pos == string::npos)
             tokens.push_back(cipherText.substr(i, cipherText.length()));
     }
+
+	//spacing analysis - might it one of our reference strings?
 	vector<Sentence> candidates;
 	for (Sentence sentence : decryptedSentences) {
 		if (sentence.isCandidate(tokens)) {
@@ -54,24 +56,13 @@ string HomophonicSolver::analyse(string cipherText)
             cipherDigrams[first][second]++;
         }
     }
-    //spacing analysis - might it one of our reference strings?
 
-	vector<vector<vector<double>>> candidateDigrams;
-	if (candidates.size() != 0) {
-		for (auto candidate : candidates) {
-			vector<vector<double>> cd = vector<vector<double>>({ 0 });
-			deriveKey(tokens, candidate);
-			getDigrams(candidate.getWords(), cd);
-			candidateDigrams.push_back(cd);
-		}
-	}
-
-    string key = getKey(cipherDigrams, candidateDigrams);
+    string key = getKey(cipherDigrams);
 
     return decrypt(tokens, key);
 }
 
-string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE], vector<vector<vector<double>>> candidateDigrams)
+string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE])
 {
     double bestScore = INT_MAX;
     string bestKey;
@@ -154,7 +145,7 @@ double HomophonicSolver::innerHillClimb(vector<vector<double>>& putativeDict, st
 
 
 
-void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<double>>& digramMap)
+void HomophonicSolver::getDigrams(const vector<string>& dictionary, vector<vector<double>>& digramMap)
 {
     double total = 0;
     digramMap.resize(ALPHABET_SIZE, vector<double>(ALPHABET_SIZE, 0));
@@ -205,7 +196,7 @@ void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<doub
 }
 
 
-double HomophonicSolver::diffDictionaries(vector<vector<double>> firstDictionary, vector<vector<double>> secondDictionary) {
+double HomophonicSolver::diffDictionaries(const vector<vector<double>>& firstDictionary, const vector<vector<double>>& secondDictionary) {
     double score = 0;
     for (int i = 0; i < ALPHABET_SIZE; i++) {
         for (int j = 0; j < ALPHABET_SIZE; j++) {
@@ -244,7 +235,7 @@ string HomophonicSolver::deriveKey(const vector<string>& tokens, Sentence& messa
 
 
 
-string HomophonicSolver::decrypt(vector<string>& cipherText, string key)
+string HomophonicSolver::decrypt(const vector<string>& cipherText, const string& key)
 {
     string message = "";
     for (string token : cipherText) {

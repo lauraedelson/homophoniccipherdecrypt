@@ -16,7 +16,7 @@ vector<string> tokenize(string input) {
 	return vstrings;
 }
 
-Sentence::Sentence(string inText): text(inText)
+Sentence::Sentence(const string& inText): text(inText)
 {
 	words = tokenize(inText);
 	for (auto word : words) {
@@ -26,17 +26,11 @@ Sentence::Sentence(string inText): text(inText)
 
 }
 
-
 Sentence::~Sentence()
 {
 }
 
-void Sentence::setDigrams(vector<vector<size_t>>& inDigrams)
-{
-	digrams = inDigrams;
-}
-
-bool Sentence::isCandidate(vector<string>& tokens)
+bool Sentence::isCandidate(const vector<string>& tokens)
 {
 	string candidateLengths;
 	size_t wordCount = 0;
