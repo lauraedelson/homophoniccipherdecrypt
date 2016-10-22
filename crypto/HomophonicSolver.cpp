@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <map>
 #include "HomophonicSolver.h"
 
 
@@ -8,6 +9,7 @@ HomophonicSolver::HomophonicSolver(vector<string> dictionaryFile, vector<string>
 {
 	getDigrams(dictionaryFile, englishDigrams);
 	for (string message : messageArray) {
+		if (!message.empty())
 		decryptedSentences.push_back(Sentence(message));
 	}
 
@@ -32,7 +34,17 @@ string HomophonicSolver::analyse(string cipherText)
         if (pos == string::npos)
             tokens.push_back(cipherText.substr(i, cipherText.length()));
     }
-
+	vector<Sentence> candidates;
+	for (Sentence sentence : decryptedSentences) {
+		if (sentence.isCandidate(tokens)) {
+			candidates.push_back(sentence);
+			string result = deriveKey(tokens, sentence);
+			if (!result.empty()) {
+				return result;
+			}
+		}
+	}
+	
     double cipherDigrams[KEY_SIZE][KEY_SIZE] = { 0 };
     //build the cipherDigrams matrix
     for (size_t i = 0; i < (tokens.size() - 1); i++) {
@@ -44,12 +56,22 @@ string HomophonicSolver::analyse(string cipherText)
     }
     //spacing analysis - might it one of our reference strings?
 
-    string key = getKey(cipherDigrams);
+	vector<vector<vector<double>>> candidateDigrams;
+	if (candidates.size() != 0) {
+		for (auto candidate : candidates) {
+			vector<vector<double>> cd = vector<vector<double>>({ 0 });
+			deriveKey(tokens, candidate);
+			getDigrams(candidate.getWords(), cd);
+			candidateDigrams.push_back(cd);
+		}
+	}
+
+    string key = getKey(cipherDigrams, candidateDigrams);
 
     return decrypt(tokens, key);
 }
 
-string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE])
+string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE], vector<vector<vector<double>>> candidateDigrams)
 {
     double bestScore = INT_MAX;
     string bestKey;
@@ -132,16 +154,6 @@ double HomophonicSolver::innerHillClimb(vector<vector<double>>& putativeDict, st
 
 
 
-
-
-
-
-
-
-
-
-
-
 void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<double>>& digramMap)
 {
     double total = 0;
@@ -193,16 +205,6 @@ void HomophonicSolver::getDigrams(vector<string>& dictionary, vector<vector<doub
 }
 
 
-
-
-
-
-
-
-
-
-
-
 double HomophonicSolver::diffDictionaries(vector<vector<double>> firstDictionary, vector<vector<double>> secondDictionary) {
     double score = 0;
     for (int i = 0; i < ALPHABET_SIZE; i++) {
@@ -214,14 +216,31 @@ double HomophonicSolver::diffDictionaries(vector<vector<double>> firstDictionary
     return score;
 }
 
+string HomophonicSolver::deriveKey(const vector<string>& tokens, Sentence& message)
+{
+	map<string, char> translation;
+	translation[" "] = ' ';
+	if (tokens.size() == message.getText().size()) {
+		string text = message.getText();
 
-
-
-
-
-
-
-
+		for (size_t i = 0; i < tokens.size(); i++) {
+			if (translation.find(tokens[i]) == translation.end()) {
+				translation[tokens[i]] = text[i];
+			}
+			else if (translation[tokens[i]] == text[i]) {
+				continue;
+			}
+			else {
+				return string();
+			}
+		}
+	}
+	string decryption;
+	for (auto token : tokens) {
+		decryption += translation[token];
+	}
+	return decryption;
+}
 
 
 
