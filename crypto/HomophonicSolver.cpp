@@ -98,6 +98,25 @@ string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE])
                 putativeDict[new_i][new_j] += cipherDigrams[new_i][new_j];
             }
         }
+
+		// Finding the total frequencies for the whole matrix
+		double total = 0.0;
+		for (int x = 0; x<ALPHABET_SIZE; x++)
+		{
+			for (int y = 0; y<ALPHABET_SIZE; y++) {
+				total = total + putativeDict[x][y];
+			}
+		}
+
+		for (int x = 0; x<ALPHABET_SIZE; x++)
+		{
+			for (int y = 0; y<ALPHABET_SIZE; y++)
+			{
+				// Dividing the individual frequencies to the sum_of_frequencies to find the relative value
+				putativeDict[x][y] = (double)putativeDict[x][y] / total;
+			}
+		}
+
         string strkey = key;
         double initScore = innerHillClimb(putativeDict, strkey);
         if (initScore < bestScore) {
@@ -170,10 +189,6 @@ void HomophonicSolver::getDigrams(const vector<string>& dictionary, vector<vecto
         }
     }
 
-    cout<<"sum of frequencies : ";
-    cout<<total<<endl;
-
-
     for(int x=0;x<ALPHABET_SIZE;x++)
     {
         for(int y=0;y<ALPHABET_SIZE;y++)
@@ -182,17 +197,6 @@ void HomophonicSolver::getDigrams(const vector<string>& dictionary, vector<vecto
             digramMap[x][y] = (double)digramMap[x][y] / total;
         }
     }
-
-    //Printing out for test purposes
-    for(int x=0;x<ALPHABET_SIZE;x++)
-    {
-        for(int y=0;y<ALPHABET_SIZE;y++)
-        {
-            cout.precision(17);
-            cout << " x: " << x <<" y: " <<y << " map value: "<< fixed << digramMap[x][y] << endl;
-        }
-    }
-
 }
 
 
