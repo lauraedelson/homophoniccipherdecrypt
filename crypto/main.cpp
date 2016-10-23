@@ -94,10 +94,15 @@ int main(int argc, char* argv[])
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     HomophonicSolver solver = HomophonicSolver(englishDict, messageArray);
-    cout << "Please enter ciphertext" << endl;
-    string ciphertext;
-    cin >> noskipws;
-    getline(cin, ciphertext);
-    cout << solver.analyse(ciphertext);
+	string input = "1";
+	do {
+		cout << "Please enter ciphertext" << endl;
+		string ciphertext;
+		cin >> noskipws;
+		getline(cin, ciphertext);
+		cout << solver.analyse(ciphertext) << endl;
+		cout << "Enter 1 to continue, 2 to exit" << endl;
+		getline(cin, input);
+	} while (input != "2");
     exit(EXIT_SUCCESS);
 }
