@@ -1,11 +1,15 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <sstream>
+#include <iostream>
+#include <iterator>
 #include "HomophonicSolver.h"
+#include <algorithm>
 
+using namespace std;
 
-
-HomophonicSolver::HomophonicSolver(const vector<string>& dictionaryFile, const vector<string>& messageArray)
+HomophonicSolver::HomophonicSolver(const vector<string>& dictionaryFile, const vector<string>& messageArray): englishDictionary(dictionaryFile)
 {
 	getDigrams(dictionaryFile, englishDigrams);
 	for (string message : messageArray) {
@@ -46,6 +50,7 @@ string HomophonicSolver::analyse(string cipherText)
 			}
 		}
 	}
+	cipherTokens = tokens;
 	
     double cipherDigrams[KEY_SIZE][KEY_SIZE] = { 0 };
     //build the cipherDigrams matrix
@@ -86,7 +91,8 @@ string HomophonicSolver::getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE])
                     }
                 }
             }
-        }		//calculate a dict based on that key
+        }		
+		//calculate a dict based on that key
         vector<vector<double>> putativeDict;
         putativeDict.resize(ALPHABET_SIZE, vector<double>(ALPHABET_SIZE, 0));
         for (int i = 0; i < KEY_SIZE; i++) {
@@ -148,6 +154,10 @@ double HomophonicSolver::innerHillClimb(vector<vector<double>>& putativeDict, st
                 testDict[new_j] = testDict[new_i];
                 testDict[new_i] = tempRow;
                 double testScore = diffDictionaries(englishDigrams, testDict);
+				string testDecrypt = decrypt(cipherTokens, testKey);
+				//vector<string> words = tokenize(testDecrypt);
+				//vector<string> intersect = intersection(words);
+				//testScore = testScore - (intersection(words).size() * .2);
                 if (testScore < score) {
                     putativeDict = testDict;
                     key = testKey;
@@ -156,8 +166,6 @@ double HomophonicSolver::innerHillClimb(vector<vector<double>>& putativeDict, st
             }
         }
     }
-    cout << "score:" << endl;
-    cout << score << endl;
     return score;
 }
 
@@ -252,4 +260,24 @@ string HomophonicSolver::decrypt(const vector<string>& cipherText, const string&
         }
     }
     return message;
+}
+
+
+//given a space delimited string, return a vector of the parts
+vector<string> HomophonicSolver::tokenize(string input) {
+	stringstream ss(input);
+	istream_iterator<string> begin(ss);
+	istream_iterator<string> end;
+	vector<string> vstrings(begin, end);
+	return vstrings;
+}
+
+
+vector<string> HomophonicSolver::intersection(vector<string> words) {
+	sort(words.begin(), words.end());
+	sort(englishDictionary.begin(), englishDictionary.end());
+
+	vector<string> returnVec;
+	set_intersection(words.begin(), words.end(), englishDictionary.begin(), englishDictionary.end(), back_inserter(returnVec));
+	return returnVec;
 }

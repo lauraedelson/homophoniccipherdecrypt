@@ -5,7 +5,7 @@ using namespace std;
 
 #define ALPHABET_SIZE 26
 #define KEY_SIZE 103
-#define RESTARTS 20
+#define RESTARTS 400
 
 #pragma once
 class HomophonicSolver
@@ -20,8 +20,9 @@ public:
 private:
 	vector<vector<double>> englishDigrams{ {0} };
 	vector<Sentence> decryptedSentences;
-	vector<string> dictionaryFile;
+	vector<string> englishDictionary;
 	size_t frequencyDistribution[ALPHABET_SIZE] = { 8, 1, 3, 4, 13, 2, 2, 6, 7, 1, 1, 4, 2, 7, 8, 2,1,6,6,9,3,1,2,1,2,1 };
+	vector<string> cipherTokens;
 
 	string getKey(double cipherDigrams[KEY_SIZE][KEY_SIZE]);
 	double innerHillClimb(vector<vector<double>>& putativeDict, string& key);
@@ -29,5 +30,7 @@ private:
 	double diffDictionaries(const vector<vector<double>>& firstMap, const vector<vector<double>>& secondMap);
 	string deriveKey(const vector<string>& tokens, Sentence& message);
 	string decrypt(const vector<string>& cipherText, const string& key);
+	vector<string> tokenize(string input);
+	vector<string> intersection(vector<string> words);
 };
 
